@@ -1,1 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Послание для симочки</title>
+<style>
+  /* Общий стиль для всех устройств */
+  body {
+    font-family: "Comic Sans MS", sans-serif;
+    background-color: #ffd6d6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+  }
 
+  h1 {
+    margin-top: 50px;
+    color: #b30000;
+    margin-bottom: 20px;
+  }
+
+  #btnContainer {
+    position: relative;
+    width: 400px;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    font-size: 2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  #yesBtn { color: white; background-color: #4CAF50; left: 20px; top: 25px; }
+  #noBtn { color: white; background-color: #f44336; left: 250px; top: 25px; }
+
+  #loveGif { width: 200px; display: none; }
+  #loveText { color: #b30000; font-size: 2em; margin-top: 10px; display: none; }
+
+  /* Адаптация для мобильных экранов */
+  @media only screen and (max-width: 480px) {
+    #btnContainer { width: 90%; height: auto; }
+    button {
+      position: relative;
+      display: inline-block;
+      width: 40%;
+      font-size: 1.5em;
+      margin: 10px;
+      top: 0;
+      left: 0;
+      color: white;
+    }
+    #loveGif { width: 50%; }
+    #loveText { font-size: 1.5em; }
+  }
+</style>
+</head>
+<body>
+<h1 id="mainTitle">Будешь моей девушкой? 💕</h1>
+<div id="btnContainer">
+  <button id="yesBtn">Да</button>
+  <button id="noBtn">Нет</button>
+</div>
+<img id="catImg" src="images/cat.gif" alt="cute cat">
+
+<!-- Гифка и текст -->
+<img id="loveGif" src="images/heart.gif" alt="Love GIF">
+<div id="loveText">Я тебя люблю ❤️</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const loveGif = document.getElementById("loveGif");
+const loveText = document.getElementById("loveText");
+const mainTitle = document.getElementById("mainTitle");
+const btnContainer = document.getElementById("btnContainer");
+const catImg = document.getElementById("catImg");
+
+// Кнопка "Нет" меняет местами
+noBtn.addEventListener("click", () => {
+  const yesStyle = window.getComputedStyle(yesBtn);
+  const noStyle = window.getComputedStyle(noBtn);
+
+  const yesPos = { left: yesStyle.left, top: yesStyle.top };
+  const noPos = { left: noStyle.left, top: noStyle.top };
+
+  yesBtn.style.left = noPos.left;
+  yesBtn.style.top = noPos.top;
+  noBtn.style.left = yesPos.left;
+  noBtn.style.top = yesPos.top;
+});
+
+// Кнопка "Да" скрывает всё лишнее и показывает гифку + текст
+yesBtn.addEventListener("click", () => {
+  mainTitle.style.display = "none";
+  btnContainer.style.display = "none";
+  catImg.style.display = "none";
+
+  loveGif.style.display = "block";
+  loveText.style.display = "block";
+});
+</script>
+</body>
+</html>
